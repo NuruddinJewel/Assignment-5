@@ -24,7 +24,7 @@ Ans: **map()** loops through an array of each item and returns a new array of sa
 
 ### 4. What is an arrow function?<br>
 Ans: Arrow function is a modern way to write functions in JS. It's a part of ES6 which was a huge update in JS.<br> 
-Instead of writing **function( ) { }**,we can write
+Instead of writing **function( ) { }**, we can write
 **( )=>{ }**.<br>It's simple one-liners where we can skip the curly braces and return keyword.<br>
 For Example :
 ```
@@ -38,7 +38,7 @@ let double = (n) => n * 2;
 
 ### 5. What are template literals?
 Ans: In JS, template literals are just strings that let us embed variables directly inside them using 
-**${ }**. We create them with backticks **(` `)**. <br>
+**${ }**. We create them with backticks **(``)**. <br>
 Example:
 <br>
 ```
