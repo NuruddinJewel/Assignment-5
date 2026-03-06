@@ -42,12 +42,14 @@ Ans: In JS, template literals are just strings that let us embed variables direc
 **${}**. We create them with backticks **(``)**. <br>
 Example:
 <br>
-``` Normal Way
+ Normal Way <br>
+```
 let name = "John";
 let message = "Hello " + name + "!";
 ```
 <br>
-```Using template literals
+Using template literals <br>
+```
 let name = "John";
 let message = `Hello ${name}!`;
 // Output : Hello John!
