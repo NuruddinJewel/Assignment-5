@@ -7,8 +7,8 @@ Ans: **var** is the old way of declaring variables in JS.<br> It's function-scop
 
 
 ### 2. What is the spread operator (...)?<br>
-Ans:In Js the spread operator (...) is like taking items out of a box and laying them on a table.<br>
-It basically "spreads" elements out of their container.Example : <br>
+Ans: In Js the spread operator (...) is like taking items out of a box and laying them on a table.<br>
+It basically "spreads" elements out of the container.Example : <br>
 ```
 let numbers = [1, 2, 3];
 let moreNumbers = [...numbers, 4, 5]; 
@@ -35,7 +35,6 @@ let double = function(n){
 //Using arrow function
 let double = (n) => n * 2;
 ```
-<br>
 
 ### 5. What are template literals?
 Ans: In JS, template literals are just strings that let us embed variables directly inside them using 
