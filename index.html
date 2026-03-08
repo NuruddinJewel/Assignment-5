@@ -40,73 +40,156 @@
 
  <main>
   <!-- Main Dashboard Section (Initially Hidden) -->
-  <section id="dashboardSection" class="hidden min-h-screen bg-[#F8FAFC]">
-    
-    <!-- 1. Top Global Navbar -->
-    <div class="navbar bg-base-100 shadow-sm px-4">
-      <div class="flex-1">
+ <!-- 1. Top Global Navbar -->
+<div class="navbar bg-base-100 shadow-sm px-4">
+    <div class="flex-1">
         <a class="btn btn-ghost gap-2 text-xl">
-          <img src="./assets/github-logo.png" class="w-6 h-6" alt="GitHub Logo">
-          <span>GitHub Issues Tracker</span>
+            <img src="./assets/github-logo.png" class="w-6 h-6" alt="GitHub Logo">
+            <span>GitHub Issues Tracker</span>
         </a>
-      </div>
-      <div class="flex gap-2">
+    </div>
+    <div class="flex gap-2">
         <label class="input input-bordered flex items-center gap-2 w-32 md:w-auto">
-          <i class="fa-solid fa-magnifying-glass opacity-50"></i>
-          <input type="text" class="grow" placeholder="Search issues..." />
+            <i class="fa-solid fa-magnifying-glass opacity-50"></i>
+            <input type="text" class="grow" placeholder="Search issues..." />
         </label>
         <button class="btn btn-primary">
-          <i class="fa-solid fa-plus"></i>
-          <span class="hidden md:inline">New issue</span>
+            <i class="fa-solid fa-plus"></i>
+            <span class="hidden md:inline">New issue</span>
         </button>
-      </div>
     </div>
+</div>
 
-    <!-- 2. Floating Sub-Navbar (The "Buttons" Bar) -->
-    <!-- mt-[60px] pushes it down from the top bar, px-[240px] centers it -->
-    <div class="mt-[60px] px-[240px]">
-      <div class="navbar bg-base-100 shadow-lg rounded-xl border border-base-200 min-h-12">
-        <div class="navbar-start gap-2 px-4">
-          <button class="btn btn-outline btn-primary btn-sm">All</button>
-          <button class="btn btn-outline btn-primary btn-sm">Open</button>
-          <button class="btn btn-outline btn-primary btn-sm">Closed</button>
+<!-- 2. Floating Sub-Navbar (Buttons) -->
+<!-- Using dynamic padding: px-4 on mobile, px-[240px] on large screens -->
+<div class="mt-8 md:mt-[60px] px-4 lg:px-[240px]">
+    <div class="navbar bg-base-100 shadow-lg rounded-xl border border-base-200 min-h-12">
+        <div class="navbar-start gap-2 px-2 md:px-4">
+            <button class="btn btn-outline btn-primary btn-sm">All</button>
+            <button class="btn btn-outline btn-primary btn-sm">Open</button>
+            <button class="btn btn-outline btn-primary btn-sm">Closed</button>
         </div>
-      </div>
     </div>
+</div>
 
-    <!-- 3. Third Navbar (The "Status" Bar) -->
-    <!-- mt-4 creates the 16px gap from the bar above -->
-    <div class="mt-4 px-[240px]">
-      <div class="navbar bg-white shadow-sm rounded-xl border border-gray-200 py-4 px-6">
-        <div class="flex items-center justify-between w-full">
-          
-          <!-- Left Side: Logo and Title -->
-          <div class="flex items-center gap-4">
-            <img src="./assets/Aperture.png" class="w-8 h-8 bg-violet-200 rounded-full" alt="Aperture">
-            <div>
-              <p class="font-bold text-xl leading-tight text-gray-800">50 issues</p>
-              <p class="text-sm text-gray-400 font-normal">Track and manage your project issues</p>
+<!-- 3. Third Navbar (Status) -->
+<div class="mt-4 px-4 lg:px-[240px]">
+    <div class="navbar bg-white shadow-sm rounded-xl border border-gray-200 py-4 px-4 md:px-6">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-4">
+            
+            <!-- Left Side: Logo and Title -->
+            <div class="flex items-center gap-4">
+                <div class="p-2 bg-violet-100 rounded-full">
+                    <img src="./assets/Aperture.png" class="w-6 h-6" alt="Aperture">
+                </div>
+                <div>
+                    <p class="font-bold text-lg md:text-xl leading-tight text-gray-800">50 issues</p>
+                    <p class="text-xs md:text-sm text-gray-400 font-normal">Track and manage project issues</p>
+                </div>
             </div>
-          </div>
 
-          <!-- Right Side: Status Indicators -->
-          <div class="flex items-center gap-6">
-            <div class="flex items-center gap-2">
-              <img src="./assets/Open-Status.png" class="w-4 h-4" alt="">
-              <span class="font-medium text-gray-700 text-sm">Open</span>
+            <!-- Right Side: Status -->
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <img src="./assets/Open-Status.png" class="w-4 h-4" alt="">
+                    <span class="font-medium text-gray-700 text-sm">Open</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <img src="./assets/Closed-Status.png" class="w-4 h-4" alt="">
+                    <span class="font-medium text-gray-700 text-sm">Closed</span>
+                </div>
             </div>
-            <div class="flex items-center gap-2">
-              <img src="./assets/Closed- Status .png" class="w-4 h-4" alt="">
-              <span class="font-medium text-gray-700 text-sm">Closed</span>
-            </div>
-          </div>
-
         </div>
-      </div>
     </div>
+</div>
 
-  </section>
-</main>
+<!-- 4. Card Section Grid -->
+<div class="mt-6 px-4 lg:px-[240px] pb-12">
+    <!-- Responsive Grid: 1 column mobile, 2 columns tablet, 3 columns desktop -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" id="issuesContainer">
+        
+        <!-- Example Issue Card (Repeat this for more cards) -->
+        <div class="card bg-base-100 border border-base-200 shadow-sm rounded-lg overflow-hidden">
+            <div class="h-1 bg-success w-full"></div>
+            <div class="card-body p-5 gap-3">
+                <div class="flex justify-between items-center">
+                    <div class="w-4 h-4 rounded-full bg-success/10 border border-success/20 flex items-center justify-center text-success font-bold text-xs"><img src="./assets/Open-Status.png" class="w-4 h-4"></div>
+                    <span class="badge badge-error badge-sm bg-red-50 text-red-600 border-none font-bold">HIGH</span>
+                </div>
+                <h2 class="font-bold text-gray-800 leading-tight">Fix Navigation Menu On Mobile Devices</h2>
+                <p class="text-sm text-gray-500">The navigation menu doesn't collapse properly on mobile devices...</p>
+                <div class="flex gap-2 mt-2">
+                    <span class="badge bg-red-50 text-red-600 border-red-100 text-[10px] font-bold">BUG</span>
+                    <span class="badge bg-amber-50 text-amber-600 border-amber-100 text-[10px] font-bold">HELP WANTED</span>
+                </div>
+            </div>
+            <div class="px-5 py-3 border-t border-base-200 text-xs text-gray-400">
+                <p>#1 by john_doe</p>
+                <p>1/15/2024</p>
+            </div>
+        </div>
+        <!-- End of Card -->
+        <!-- Added 'border-purple-500' and 'border-2' for better visibility -->
+        <div class="card bg-base-100 border border-base-200 shadow-sm rounded-lg overflow-hidden">
+            <div class="h-1 bg-success w-full"></div>
+            <div class="card-body p-5 gap-3">
+                <div class="flex justify-between items-center">
+                    <div class="w-4 h-4 rounded-full bg-success/10 border border-success/20 flex items-center justify-center text-success font-bold text-xs"><img src="./assets/Open-Status.png" class="w-4 h-4"></div>
+                    <span class="badge badge-error badge-sm bg-orange-100 text-orange-300  border-none font-bold">MEDIUM</span>
+                </div>
+                <h2 class="font-bold text-gray-800 leading-tight">Fix Navigation Menu On Mobile Devices</h2>
+                <p class="text-sm text-gray-500">The navigation menu doesn't collapse properly on mobile devices...</p>
+                <div class="flex gap-2 mt-2">
+                    <span class="badge bg-red-50 text-red-600 border-red-100 text-[10px] font-bold">BUG</span>
+                    <span class="badge bg-amber-50 text-amber-600 border-amber-100 text-[10px] font-bold">HELP WANTED</span>
+                </div>
+            </div>
+            <div class="px-5 py-3 border-t border-base-200 text-xs text-gray-400">
+                <p>#1 by john_doe</p>
+                <p>1/15/2024</p>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <div class="card bg-base-100 border border-base-200 shadow-sm rounded-lg overflow-hidden">
+            <div class="h-1 bg-purple-500 w-full"></div>
+            <div class="card-body p-5 gap-3">
+                <div class="flex justify-between items-center">
+                    <div class="w-4 h-4 rounded-full bg-success/10 border border-success/20 flex items-center justify-center text-success font-bold text-xs"><img src="./assets/Closed-Status.png" class="w-4 h-4"></div>
+                    <span class="badge badge-error badge-sm bg-gray-100 text-gray-600  border-none font-bold">LOW</span>
+                </div>
+                <h2 class="font-bold text-gray-800 leading-tight">Fix Navigation Menu On Mobile Devices</h2>
+                <p class="text-sm text-gray-500">The navigation menu doesn't collapse properly on mobile devices...</p>
+                <div class="flex gap-2 mt-2">
+                    <span class="badge bg-red-50 text-red-600 border-red-100 text-[10px] font-bold">BUG</span>
+                    <span class="badge bg-amber-50 text-amber-600 border-amber-100 text-[10px] font-bold">HELP WANTED</span>
+                </div>
+            </div>
+            <div class="px-5 py-3 border-t border-base-200 text-xs text-gray-400">
+                <p>#1 by john_doe</p>
+                <p>1/15/2024</p>
+            </div>
+        </div>
+
+    </div>
+</div>
     <footer>
     </footer>
     
@@ -114,3 +197,7 @@
     <script src="./script/index.js"></script>
 </body>
 </html>
+
+
+
+
