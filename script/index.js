@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginMessage = document.getElementById('loginMessage');
     
     // Admin credentials
-    const ADMIN_USERNAME = 'admin';
-    const ADMIN_PASSWORD = 'admin123'; // You can change this password
+    const ADMIN_USERNAME = 'c';
+    const ADMIN_PASSWORD = 'c'; // You can change this password
     
     // Add click event listener to the Sign In button
     signInBtn.addEventListener('click', function(event) {

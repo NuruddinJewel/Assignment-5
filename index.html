@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practise</title>
+    <title>Assignment-05</title>
     <!-- Title and logo -->
     <link rel="stylesheet" href="./assets/logo.png">
     <!-- Font Awesome - corrected version -->
@@ -38,33 +38,75 @@
         </nav>
     </header>
 
-    <main>
-        <!-- Main Dashboard Section (Initially Hidden) -->
-        <section id="dashboardSection" class="hidden">
-            <div class="navbar bg-base-100 shadow-sm px-4">
-                <div class="flex-1">
-                    <a class="btn btn-ghost gap-2 text-xl">
-                        <img src="./assets/github-logo.png" class="w-6 h-6" alt="GitHub Logo">
-                        <span>GitHub Issues Tracker</span>
-                    </a>
-                </div>
-                <div class="flex gap-2">
-                    <label class="input input-bordered flex items-center gap-2 w-32 md:w-auto">
-                        <i class="fa-solid fa-magnifying-glass opacity-50"></i>
-                        <input type="text" class="grow" placeholder="Search issues..." />
-                    </label>
-                    <div class="dropdown dropdown-end">
-                        <button class="btn btn-primary">
-                            <i class="fa-solid fa-plus"></i>
-                            <span class="hidden md:inline">New issue</span>
-                        </button>
-                    </div>
-                </div>
+ <main>
+  <!-- Main Dashboard Section (Initially Hidden) -->
+  <section id="dashboardSection" class="hidden min-h-screen bg-[#F8FAFC]">
+    
+    <!-- 1. Top Global Navbar -->
+    <div class="navbar bg-base-100 shadow-sm px-4">
+      <div class="flex-1">
+        <a class="btn btn-ghost gap-2 text-xl">
+          <img src="./assets/github-logo.png" class="w-6 h-6" alt="GitHub Logo">
+          <span>GitHub Issues Tracker</span>
+        </a>
+      </div>
+      <div class="flex gap-2">
+        <label class="input input-bordered flex items-center gap-2 w-32 md:w-auto">
+          <i class="fa-solid fa-magnifying-glass opacity-50"></i>
+          <input type="text" class="grow" placeholder="Search issues..." />
+        </label>
+        <button class="btn btn-primary">
+          <i class="fa-solid fa-plus"></i>
+          <span class="hidden md:inline">New issue</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 2. Floating Sub-Navbar (The "Buttons" Bar) -->
+    <!-- mt-[60px] pushes it down from the top bar, px-[240px] centers it -->
+    <div class="mt-[60px] px-[240px]">
+      <div class="navbar bg-base-100 shadow-lg rounded-xl border border-base-200 min-h-12">
+        <div class="navbar-start gap-2 px-4">
+          <button class="btn btn-outline btn-primary btn-sm">All</button>
+          <button class="btn btn-outline btn-primary btn-sm">Open</button>
+          <button class="btn btn-outline btn-primary btn-sm">Closed</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Third Navbar (The "Status" Bar) -->
+    <!-- mt-4 creates the 16px gap from the bar above -->
+    <div class="mt-4 px-[240px]">
+      <div class="navbar bg-white shadow-sm rounded-xl border border-gray-200 py-4 px-6">
+        <div class="flex items-center justify-between w-full">
+          
+          <!-- Left Side: Logo and Title -->
+          <div class="flex items-center gap-4">
+            <img src="./assets/Aperture.png" class="w-8 h-8 bg-violet-200 rounded-full" alt="Aperture">
+            <div>
+              <p class="font-bold text-xl leading-tight text-gray-800">50 issues</p>
+              <p class="text-sm text-gray-400 font-normal">Track and manage your project issues</p>
             </div>
-            
-            <!-- Dashboard Content -->
-        </section>
-    </main>
+          </div>
+
+          <!-- Right Side: Status Indicators -->
+          <div class="flex items-center gap-6">
+            <div class="flex items-center gap-2">
+              <img src="./assets/Open-Status.png" class="w-4 h-4" alt="">
+              <span class="font-medium text-gray-700 text-sm">Open</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <img src="./assets/Closed- Status .png" class="w-4 h-4" alt="">
+              <span class="font-medium text-gray-700 text-sm">Closed</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+</main>
     <footer>
     </footer>
     
