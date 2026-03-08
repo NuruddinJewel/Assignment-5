@@ -37,10 +37,10 @@
             </div>
         </nav>
     </header> 
-
     <!-- DASHBOARD SECTION (Initially Hidden) -->
     <main id="dashboardSection" class="hidden">
         <!-- 1. Top Navbar -->
+        <section>
         <div class="navbar bg-base-100 shadow-sm px-4 lg:px-[240px]">
             <div class="flex-1">
                 <a class="btn btn-ghost gap-2 text-xl">
@@ -48,11 +48,13 @@
                     <span>GitHub Issues Tracker</span>
                 </a>
             </div>
+            <!-- old 1 -->
             <!-- <div class="flex gap-2">
                 <input type="text" id="searchInput" placeholder="Search issues..." class="input input-bordered input-sm w-32 md:w-auto" />
                 <button id="searchBtn" class="btn btn-primary btn-sm">Search</button>
             </div> -->
-             <div class="flex gap-2">
+      <!-- old 2 -->
+            <!-- <div class="flex gap-2">
         <label class="input input-bordered flex items-center gap-2 w-32 md:w-auto">
             <i class="fa-solid fa-magnifying-glass opacity-50"></i>
             <input type="text" class="grow"id="searchInput"  placeholder="Search issues..." />
@@ -61,7 +63,46 @@
             <i class="fa-solid fa-plus"></i>
             <span class="hidden md:inline">New issue</span>
         </button>
+    </div> -->
+<!-- New 3 -->
+<!-- Navbar Search & Button Area -->
+<div class="flex gap-2">
+    <label class="input input-bordered flex items-center gap-2 w-32 md:w-auto">
+        <i class="fa-solid fa-magnifying-glass opacity-50"></i>
+        <!-- Changed to a search input for dynamic typing -->
+        <input type="text" class="grow" id="searchInput" placeholder="Search issues..." />
+    </label>
+    <!-- New Issue Button opens the modal -->
+    <button class="btn btn-primary" onclick="newIssueModal.showModal()">
+        <i class="fa-solid fa-plus"></i>
+        <span class="hidden md:inline">New issue</span>
+    </button>
+</div>
+
+<!-- NEW ISSUE MODAL -->
+<dialog id="newIssueModal" class="modal">
+    <div class="modal-box">
+        <h3 class="font-bold text-lg mb-4">Create New Issue</h3>
+        <form id="newIssueForm" class="space-y-4">
+            <input type="text" id="newTitle" placeholder="Issue Title" class="input input-bordered w-full" required />
+            <textarea id="newDesc" placeholder="Description" class="textarea textarea-bordered w-full" required></textarea>
+            <div class="flex gap-2">
+                <select id="newPriority" class="select select-bordered w-full">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+                <input type="text" id="newAuthor" placeholder="Your Name" class="input input-bordered w-full" required />
+            </div>
+            <div class="modal-action">
+                <button type="button" class="btn" onclick="newIssueModal.close()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Add Issue</button>
+            </div>
+        </form>
     </div>
+</dialog>
+
+
         </div>
 
         <!-- 2. Filter Buttons -->
@@ -74,20 +115,41 @@
         </div>
 
         <!-- 3. Status Display -->
-        <div class="mt-4 px-4 lg:px-[240px]">
-            <div class="bg-white p-4 rounded-xl border border-gray-200 flex justify-between items-center">
-                <h2 class="font-bold text-lg" id="issueHeadline">Loading issues...</h2>
-                <div class="flex gap-4 text-sm">
-                    <span class="text-success font-bold">● Open</span>
-                    <span class="text-purple-600 font-bold">● Closed</span>
-                </div>
+<div class="mt-4 px-4 lg:px-[240px]">
+    <!-- Main Header Card -->
+    <div class="bg-white p-4 rounded-xl border border-gray-200 flex justify-between items-center">
+        
+        <!-- Left Side: Icon + Text Group -->
+        <div class="flex items-center gap-3">
+            <!-- Aperture Icon -->
+            <img src="./assets/Aperture.png" class="w-10 h-10 bg-violet-100 p-2 rounded-full" alt="Aperture">
+            
+            <!-- Text Stack: Headline on top, Paragraph below -->
+            <div class="flex flex-col">
+                <h2 class="font-bold text-xl text-gray-800 leading-none" id="issueHeadline">Loading issues...</h2>
+                <p class="text-sm text-gray-400 font-normal mt-1">Track and manage your project issues</p>
             </div>
         </div>
 
-        <!-- 4. Grid Container -->
+        <!-- Right Side: Status Indicators -->
+        <div class="flex gap-4 text-sm">
+            <span class="text-success font-bold">● Open</span>
+            <span class="text-purple-600 font-bold">● Closed</span>
+        </div>
+        
+    </div>
+</div>
+    <!-- 4. Grid Container -->
         <div class="mt-6 px-4 lg:px-[240px] pb-12">
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" id="issuesContainer"></div>
         </div>
+    </section>
+<!-- Spinner -->
+    <section id="spin" class="flex justify-center items-center py-8 hidden">
+            <span class="loading loading-spinner text-success"></span>
+    </section>
+
+
     </main>
 
     <!-- DAISY UI MODAL -->
@@ -98,6 +160,6 @@
         </form>
     </dialog>
 
-    <script src="./script/index.js"></script>
+    <script src="./script/index2.js"></script>
 </body>
 </html>
