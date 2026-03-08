@@ -6,7 +6,6 @@
     <title>Assignment_05</title>
     <!-- Title and logo  -->
     <link rel="stylesheet" href="./assets/logo.png">
- 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
     <!-- Tailwind and DaisyUI -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
@@ -18,25 +17,50 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
 </head>
-<body>
- <header id="loginSection" class="flex items-center justify-center min-h-screen bg-base-200"> 
-        <!-- Login Section  -->
-         <nav class="flex items-center justify-center min-h-screen bg-base-200" id="loginSection">
-            <div class="w-full max-w-xs">
-                <fieldset class="fieldset bg-base-100 border-base-100 rounded-box border p-6 shadow-sm">
-                    <img src="./assets/github-logo.png" class="w-24 h-24 mx-auto" alt="GitHub Logo">
-                    <h2 class="font-semibold text-lg text-center">GitHub Issues Tracker</h2>
-                    <p class="text-center text-xs">Sign in to manage your issues</p>  
-                    <label class="text-black text-sm mt-2">Username</label>
-                    <input type="text" class="input input-bordered" id="username" placeholder="Enter Username" />
-                    <label class="text-black text-sm mt-2">Password</label>
-                    <input type="password" class="input input-bordered" id="password" placeholder="Enter Password" />
-                    <button class="btn btn-primary mt-6" id="signInBtn">Sign In</button>
-                    <p id="loginMessage" class="text-red-500 text-sm text-center mt-2 hidden"></p>
-                </fieldset>
+<body class="bg-[#F8FAFC]">
+    <!-- Login Section -->
+    <header id="loginSection" class="flex items-center justify-center min-h-screen bg-base-200 p-4">
+    <div class="w-full max-w-xs bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+        <!-- Logo and Title -->
+        <div class="text-center mb-6">
+            <img src="./assets/github-logo.png" class="w-20 h-20 mx-auto mb-2" alt="GitHub Logo">
+            <h2 class="text-2xl font-bold text-gray-800">GitHub Issues Tracker</h2>
+            <p class="text-gray-400 text-sm mt-1">Sign in to manage your issues</p>
+        </div>
+        <!-- Form Fields -->
+        <div class="space-y-4">
+            <div class="form-control">
+                <label class="label pb-1">
+                    <span class="label-text font-semibold text-gray-700">Username</span>
+                </label>
+                <input type="text" id="username" placeholder="Enter Username" class="input input-bordered w-full bg-white border-gray-200 focus:border-violet-500 rounded-xl" />
+                <span class="text-[10px] text-violet-600 mt-1 ml-1">Default: admin</span>
             </div>
-        </nav>
-    </header> 
+            <div class="form-control">
+                <label class="label pb-1">
+                    <span class="label-text font-semibold text-gray-700">Password</span>
+                </label>
+                <input type="password" id="password" placeholder="Enter Password" class="input input-bordered w-full bg-white border-gray-200 focus:border-violet-500 rounded-xl" />
+                <span class="text-[10px] text-violet-600 mt-1 ml-1">Default: admin123</span>
+            </div>
+            <!-- Sign In Button -->
+            <button id="signInBtn" class="btn w-full mt-4 bg-[#4B00FF] hover:bg-[#3A00CC] text-white border-none rounded-xl h-10 text-lg">
+                Sign In
+            </button>
+            <p id="loginMessage" class="text-red-500 text-xs text-center mt-2 hidden"></p>
+        </div>
+        <!-- OR Divider -->
+        <div class="divider text-[10px] text-gray-400 my-4">OR</div>
+        <!-- Demo Credentials Box -->
+        <div class="text-center">
+            <p class="text-[10px] text-gray-400 mb-2">Demo Credentials:</p>
+            <div class="bg-[#F8F9FD] rounded-2xl p-4 text-xs">
+                <p class="text-gray-600"><b class="text-gray-800">Username:</b> admin</p>
+                <p class="text-gray-600"><b class="text-gray-800">Password:</b> admin123</p>
+            </div>
+        </div>
+    </div>
+</header>
     <!-- DASHBOARD SECTION (Initially Hidden) -->
     <main id="dashboardSection" class="hidden">
         <!-- 1. Top Navbar -->
@@ -48,24 +72,6 @@
                     <span>GitHub Issues Tracker</span>
                 </a>
             </div>
-            <!-- old 1 -->
-            <!-- <div class="flex gap-2">
-                <input type="text" id="searchInput" placeholder="Search issues..." class="input input-bordered input-sm w-32 md:w-auto" />
-                <button id="searchBtn" class="btn btn-primary btn-sm">Search</button>
-            </div> -->
-      <!-- old 2 -->
-            <!-- <div class="flex gap-2">
-        <label class="input input-bordered flex items-center gap-2 w-32 md:w-auto">
-            <i class="fa-solid fa-magnifying-glass opacity-50"></i>
-            <input type="text" class="grow"id="searchInput"  placeholder="Search issues..." />
-        </label>
-        <button class="btn btn-primary" id="searchBtn">
-            <i class="fa-solid fa-plus"></i>
-            <span class="hidden md:inline">New issue</span>
-        </button>
-    </div> -->
-<!-- New 3 -->
-<!-- Navbar Search & Button Area -->
 <div class="flex gap-2">
     <label class="input input-bordered flex items-center gap-2 w-32 md:w-auto">
         <i class="fa-solid fa-magnifying-glass opacity-50"></i>
@@ -78,7 +84,6 @@
         <span class="hidden md:inline">New issue</span>
     </button>
 </div>
-
 <!-- NEW ISSUE MODAL -->
 <dialog id="newIssueModal" class="modal">
     <div class="modal-box">
@@ -101,11 +106,8 @@
         </form>
     </div>
 </dialog>
-
-
-        </div>
-
-        <!-- 2. Filter Buttons -->
+</div>
+  <!-- 2. Filter Buttons -->
         <div class="mt-8 px-4 lg:px-[240px]">
             <div class="navbar bg-base-100 shadow-sm rounded-xl border border-base-200 px-4 gap-2">
                 <button class="btn btn-primary btn-sm btn-outline" id="btnAll">All</button>
@@ -113,30 +115,26 @@
                 <button class="btn btn-primary btn-sm btn-outline" id="btnClosed">Closed (0)</button>
             </div>
         </div>
-
-        <!-- 3. Status Display -->
+ <!-- 3. Status Display -->
 <div class="mt-4 px-4 lg:px-[240px]">
-    <!-- Main Header Card -->
-    <div class="bg-white p-4 rounded-xl border border-gray-200 flex justify-between items-center">
+ <!-- Main Header Card -->
+ <div class="bg-white p-4 rounded-xl border border-gray-200 flex justify-between items-center">
         
         <!-- Left Side: Icon + Text Group -->
         <div class="flex items-center gap-3">
             <!-- Aperture Icon -->
-            <img src="./assets/Aperture.png" class="w-10 h-10 bg-violet-100 p-2 rounded-full" alt="Aperture">
-            
+            <img src="./assets/Aperture.png" class="w-10 h-10 bg-violet-100 p-2 rounded-full" alt="Aperture">      
             <!-- Text Stack: Headline on top, Paragraph below -->
             <div class="flex flex-col">
                 <h2 class="font-bold text-xl text-gray-800 leading-none" id="issueHeadline">Loading issues...</h2>
                 <p class="text-sm text-gray-400 font-normal mt-1">Track and manage your project issues</p>
             </div>
         </div>
-
         <!-- Right Side: Status Indicators -->
         <div class="flex gap-4 text-sm">
             <span class="text-success font-bold">● Open</span>
             <span class="text-purple-600 font-bold">● Closed</span>
-        </div>
-        
+        </div>    
     </div>
 </div>
     <!-- 4. Grid Container -->
@@ -148,10 +146,7 @@
     <section id="spin" class="flex justify-center items-center py-8 hidden">
             <span class="loading loading-spinner text-success"></span>
     </section>
-
-
     </main>
-
     <!-- DAISY UI MODAL -->
     <dialog id="issueDetailModal" class="modal">
         <div class="modal-box w-11/12 max-w-2xl" id="modalBody"></div>
@@ -159,7 +154,6 @@
             <button>close</button>
         </form>
     </dialog>
-
-    <script src="./script/index2.js"></script>
+    <script src="./script/index.js"></script>
 </body>
 </html>
