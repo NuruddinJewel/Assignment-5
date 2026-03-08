@@ -1,8 +1,4 @@
-*{
-    font-family: "Geist", sans-serif;
-}
-
-Custom Modal Styling to match design
+/* Custom Modal Styling to match design
  .modal-box {
     border-radius: 1.5rem;
     padding: 2rem;
@@ -16,7 +12,6 @@ Custom Modal Styling to match design
 }
 
  Custom background for the Assignee box */
- .bg-light-gray {
+ /* .bg-light-gray {
     background-color: #F8FAFC;
-} 
-
+}  */ 

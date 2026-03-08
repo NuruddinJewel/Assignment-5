@@ -1,104 +1,114 @@
-// script.js - Login functionality
-
-// Wait for the DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // Get references to HTML elements using their IDs
+document.addEventListener('DOMContentLoaded', () => {
     const signInBtn = document.getElementById('signInBtn');
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
     const loginSection = document.getElementById('loginSection');
     const dashboardSection = document.getElementById('dashboardSection');
-    const loginMessage = document.getElementById('loginMessage');
-    
-    // Admin credentials
-    const ADMIN_USERNAME = 'c';
-    const ADMIN_PASSWORD = 'c'; // You can change this password
-    
-    // Add click event listener to the Sign In button
-    signInBtn.addEventListener('click', function(event) {
-        // Prevent any default behavior
-        event.preventDefault();
-        
-        // Get the values from input fields
-        const username = usernameInput.value.trim();
-        const password = passwordInput.value.trim();
-        
-        // Validate input fields
-        if (username === '' || password === '') {
-            showMessage('Please enter both username and password', 'error');
-            return;
-        }
-        
-        // Check credentials
-        if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-            // Successful login
-            successfulLogin();
+    const issuesContainer = document.getElementById('issuesContainer');
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+
+    let allIssues = [];
+
+    // 1. LOGIN LOGIC
+    signInBtn.addEventListener('click', () => {
+        const u = document.getElementById('username').value;
+        const p = document.getElementById('password').value;
+        if (u === 'admin' && p === 'admin123') {
+            loginSection.classList.add('hidden');
+            dashboardSection.classList.remove('hidden');
+            fetchIssues(); // Load API data after login
         } else {
-            // Failed login
-            showMessage('Invalid username or password', 'error');
-            // Clear password field for security
-            passwordInput.value = '';
+            const msg = document.getElementById('loginMessage');
+            msg.textContent = "Invalid Credentials!";
+            msg.classList.remove('hidden');
         }
     });
-    
-    // Function to handle successful login
-    function successfulLogin() {
-        // Hide login section
-        loginSection.classList.add('hidden');
-        
-        // Show dashboard section
-        dashboardSection.classList.remove('hidden');
-        
-        // Clear any previous messages
-        loginMessage.classList.add('hidden');
-        loginMessage.textContent = '';
-        
-        // Clear input fields
-        usernameInput.value = '';
-        passwordInput.value = '';
-        
-        // Optional: Show success message (you can remove this if not needed)
-        console.log('Login successful!');
-    }
-    
-    // Function to show error messages
-    function showMessage(message, type) {
-        loginMessage.textContent = message;
-        loginMessage.classList.remove('hidden');
-        
-        // Set color based on message type
-        if (type === 'error') {
-            loginMessage.classList.remove('text-green-500');
-            loginMessage.classList.add('text-red-500');
-        } else {
-            loginMessage.classList.remove('text-red-500');
-            loginMessage.classList.add('text-green-500');
-        }
-        
-        // Auto-hide message after 3 seconds
-        setTimeout(function() {
-            loginMessage.classList.add('hidden');
-        }, 3000);
-    }
-    
-    // Optional: Add Enter key functionality
-    function handleEnterKey(event) {
-        if (event.key === 'Enter') {
-            signInBtn.click();
-        }
-    }
-    
-    // Add enter key listeners to input fields
-    usernameInput.addEventListener('keypress', handleEnterKey);
-    passwordInput.addEventListener('keypress', handleEnterKey);
-    
-    // Optional: Add logout functionality (if you want to add a logout button later)
-    // You can create this function to return to login screen
-    window.logout = function() {
-        dashboardSection.classList.add('hidden');
-        loginSection.classList.remove('hidden');
-    };
-});
 
-    
+    // 2. FETCH DATA FROM API
+    async function fetchIssues(query = '') {
+        const url = query 
+            ? `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${query}`
+            : `https://phi-lab-server.vercel.app/api/v1/lab/issues`;
+
+        try {
+            const res = await fetch(url);
+            const data = await res.json();
+            allIssues = data.data || data; 
+            renderCards(allIssues);
+            updateFilterCounts();
+        } catch (err) {
+            console.error("Error:", err);
+            document.getElementById('issueHeadline').innerText = "Failed to load data.";
+        }
+    }
+
+    // 3. RENDER CARDS
+    function renderCards(issues) {
+        issuesContainer.innerHTML = '';
+        document.getElementById('issueHeadline').innerText = `${issues.length} Issues Found`;
+
+        issues.forEach(issue => {
+            const isOpen = issue.status.toLowerCase() === 'open';
+            const borderCol = isOpen ? 'bg-success' : 'bg-purple-600';
+            const icon = isOpen ? './assets/Open-Status.png' : './assets/Closed-Status.png';
+
+            const card = document.createElement('div');
+            card.className = "card bg-base-100 border border-base-200 shadow-sm rounded-lg overflow-hidden cursor-pointer hover:shadow-md";
+            card.onclick = () => showDetail(issue.id);
+            
+            card.innerHTML = `
+                <div class="h-1 ${borderCol} w-full"></div>
+                <div class="card-body p-5 gap-2">
+                    <div class="flex justify-between">
+                        <img src="${icon}" class="w-5 h-5">
+                        <span class="badge badge-sm font-bold uppercase ${issue.priority === 'high' ? 'badge-error' : 'badge-ghost'}">${issue.priority}</span>
+                    </div>
+                    <h2 class="font-bold text-gray-800 line-clamp-1">${issue.title}</h2>
+                    <p class="text-xs text-gray-500 line-clamp-2">${issue.description}</p>
+                    <div class="mt-2 text-[10px] text-gray-400">#${issue.id} by ${issue.author}</div>
+                </div>
+            `;
+            issuesContainer.appendChild(card);
+        });
+    }
+
+    // 4. MODAL DETAIL
+    async function showDetail(id) {
+        const modal = document.getElementById('issueDetailModal');
+        const modalBody = document.getElementById('modalBody');
+        modal.showModal();
+        modalBody.innerHTML = `<span class="loading loading-spinner loading-lg"></span>`;
+
+        try {
+            const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
+            const result = await res.json();
+            const item = result.data;
+
+            modalBody.innerHTML = `
+                <h3 class="font-bold text-2xl">${item.title}</h3>
+                <div class="badge ${item.status === 'open' ? 'badge-success' : 'badge-secondary'} my-2">${item.status}</div>
+                <p class="py-4 text-gray-600">${item.description}</p>
+                <div class="divider"></div>
+                <p class="text-sm"><b>Author:</b> ${item.author} | <b>Date:</b> ${item.date}</p>
+                <div class="modal-action">
+                    <button class="btn" onclick="issueDetailModal.close()">Close</button>
+                </div>
+            `;
+        } catch (err) {
+            modalBody.innerHTML = "Error loading details.";
+        }
+    }
+
+    // 5. SEARCH & FILTER EVENTS
+    searchBtn.addEventListener('click', () => fetchIssues(searchInput.value));
+
+    document.getElementById('btnAll').onclick = () => renderCards(allIssues);
+    document.getElementById('btnOpen').onclick = () => renderCards(allIssues.filter(i => i.status.toLowerCase() === 'open'));
+    document.getElementById('btnClosed').onclick = () => renderCards(allIssues.filter(i => i.status.toLowerCase() === 'closed'));
+
+    function updateFilterCounts() {
+        const openNum = allIssues.filter(i => i.status.toLowerCase() === 'open').length;
+        const closedNum = allIssues.filter(i => i.status.toLowerCase() === 'closed').length;
+        document.getElementById('btnOpen').innerText = `Open (${openNum})`;
+        document.getElementById('btnClosed').innerText = `Closed (${closedNum})`;
+    }
+});
