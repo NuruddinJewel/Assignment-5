@@ -65,17 +65,17 @@
     <main id="dashboardSection" class="hidden">
         <!-- 1. Top Navbar -->
         <section>
-        <div class="navbar bg-base-100 shadow-sm px-4 lg:px-[240px]">
+        <div class="navbar bg-base-100 shadow-sm px-4 md:px-10 xl:px-20">
             <div class="flex-1">
                 <a class="btn btn-ghost gap-2 text-xl">
                     <img src="./assets/github-logo.png" class="w-6 h-6">
                     <span>GitHub Issues Tracker</span>
                 </a>
             </div>
-<div class="flex gap-2">
+        <div class="flex gap-2">
     <label class="input input-bordered flex items-center gap-2 w-32 md:w-auto">
         <i class="fa-solid fa-magnifying-glass opacity-50"></i>
-        <!-- Changed to a search input for dynamic typing -->
+        <!-- Search input for dynamic typing -->
         <input type="text" class="grow" id="searchInput" placeholder="Search issues..." />
     </label>
     <!-- New Issue Button opens the modal -->
@@ -83,7 +83,7 @@
         <i class="fa-solid fa-plus"></i>
         <span class="hidden md:inline">New issue</span>
     </button>
-</div>
+    </div>
 <!-- NEW ISSUE MODAL -->
 <dialog id="newIssueModal" class="modal">
     <div class="modal-box">
@@ -108,29 +108,24 @@
 </dialog>
 </div>
   <!-- 2. Filter Buttons -->
-        <div class="mt-8 px-4 lg:px-[240px]">
-            <div class="navbar bg-base-100 shadow-sm rounded-xl border border-base-200 px-4 gap-2">
-                <button class="btn btn-primary btn-sm btn-outline" id="btnAll">All</button>
-                <button class="btn btn-primary btn-sm btn-outline" id="btnOpen">Open (0)</button>
-                <button class="btn btn-primary btn-sm btn-outline" id="btnClosed">Closed (0)</button>
-            </div>
+<div class="mt-8 px-4 md:px-10 xl:px-20">
+        <div class="navbar bg-base-100 shadow-sm rounded-xl border border-base-200 px-8 gap-2">
+            <button class="btn btn-primary btn-sm btn-outline" id="btnAll">All</button>
+             <button class="btn btn-primary btn-sm btn-outline" id="btnOpen">Open (0)</button>
+             <button class="btn btn-primary btn-sm btn-outline" id="btnClosed">Closed (0)</button>
         </div>
+</div>
  <!-- 3. Status Display -->
-<div class="mt-4 px-4 lg:px-[240px]">
+<div class="mt-4 px-4 md:px-10 xl:px-20 bg-[#F8FAFC]">
  <!-- Main Header Card -->
- <div class="bg-white p-4 rounded-xl border border-gray-200 flex justify-between items-center">
-        
-        <!-- Left Side: Icon + Text Group -->
+<div class="bg-white p-4 rounded-xl border border-gray-200 flex justify-between items-center">
         <div class="flex items-center gap-3">
-            <!-- Aperture Icon -->
             <img src="./assets/Aperture.png" class="w-10 h-10 bg-violet-100 p-2 rounded-full" alt="Aperture">      
-            <!-- Text Stack: Headline on top, Paragraph below -->
             <div class="flex flex-col">
                 <h2 class="font-bold text-xl text-gray-800 leading-none" id="issueHeadline">Loading issues...</h2>
                 <p class="text-sm text-gray-400 font-normal mt-1">Track and manage your project issues</p>
             </div>
         </div>
-        <!-- Right Side: Status Indicators -->
         <div class="flex gap-4 text-sm">
             <span class="text-success font-bold">● Open</span>
             <span class="text-purple-600 font-bold">● Closed</span>
@@ -138,9 +133,11 @@
     </div>
 </div>
     <!-- 4. Grid Container -->
-        <div class="mt-6 px-4 lg:px-[240px] pb-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" id="issuesContainer"></div>
-        </div>
+        <div class="mt-6 px-4 md:px-10 xl:px-20 pb-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="issuesContainer">
+        <!-- Cards will be injected here by JS -->
+    </div>
+</div>
     </section>
 <!-- Spinner -->
     <section id="spin" class="flex justify-center items-center py-8 hidden">
